@@ -4,12 +4,14 @@ const Constant = require('./Constant');
 class Lotto {
   #numbers;
   #same;
+  #bonus;
 
   constructor(numbers) {
     this.#validateLength(numbers);
     this.#validateNumber(numbers);
     this.#numbers = numbers;
     this.#same = 0;
+    this.#bonus = false;
   }
 
   // TODO: 추가 기능 구현
@@ -35,6 +37,11 @@ class Lotto {
     return this.#same;
   }
 
+  // 보너스 여부 반환 함수
+  get bonus(){
+    return this.#bonus;
+  }
+
   // 당첨된 번호 갯수 계산하는 함수
   calcWinning(winnings){
     for(let i = 0 ; i <Constant.LOTTO_LENGTH ; i++ ){
@@ -45,6 +52,11 @@ class Lotto {
   }
 
   // 보너스 번호 일치하는지 확인하는 함수
+  matchBonus(bonus){
+    if(this.#numbers.includes(Number(bonus))){
+      this.#bonus = true;
+    }
+  }
 
   // 수익금
 }
